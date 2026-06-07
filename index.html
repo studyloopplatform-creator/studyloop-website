@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyLoop — Studia meglio, ogni giorno</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1022;
+      --bg-deep: #080a18;
+      --panel: #161d35;
+      --panel-2: #10162a;
+      --panel-hi: #1f2945;
+      --line: #2c3c61;
+      --line-soft: #1d2742;
+      --ink: #eef3ff;
+      --ink-dim: #8a96b4;
+      --ink-faint: #5b678a;
+      --cyan: #3fa9e6;
+      --cyan-bright: #79d0f9;
+      --cyan-deep: #1d6fae;
+      --gold: #f3c23b;
+      --green: #46c95f;
+      --flame: #ff6a35;
+      --purple: #8b5cff;
+      --red: #e8473e;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--ink);
+      font-family: 'Pixelify Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── SFONDO GRIGLIA ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(63,169,230,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(63,169,230,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,10,24,0.92);
+      border-bottom: 2px solid var(--line);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--cyan-bright);
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(121,208,249,0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--ink-dim);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cyan-bright); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 70px 2rem 80px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--panel);
+      border: 2px solid var(--cyan-deep);
+      border-radius: 9px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      color: var(--cyan-bright);
+      margin-bottom: 2rem;
+      box-shadow: 0 0 14px rgba(63,169,230,0.2);
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: var(--ink);
+      text-shadow: 0 0 40px rgba(121,208,249,0.15);
+    }
+
+    .hero h1 span {
+      color: var(--cyan-bright);
+      text-shadow: 0 0 20px rgba(121,208,249,0.6);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--ink-dim);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* ── PULSANTI DOWNLOAD ── */
+    .download-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      scroll-margin-top: 72px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 9px;
+      font-family: 'Pixelify Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--line);
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+      position: relative;
+    }
+
+    .btn:active { transform: translateY(2px); }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #8fdcfb 0%, #46b6ec 40%, #2f97d4 100%);
+      color: #040d1a;
+      border-color: var(--cyan-bright);
+      box-shadow: 0 3px 0 var(--cyan-deep), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .btn-primary:active { box-shadow: 0 1px 0 var(--cyan-deep), inset 0 1px 0 rgba(255,255,255,0.15); }
+
+    .btn-secondary {
+      background: linear-gradient(180deg, var(--panel-hi) 0%, var(--panel-2) 100%);
+      color: var(--ink);
+      box-shadow: 0 3px 0 #050810, inset 0 1px 0 rgba(150,200,255,0.12);
+    }
+
+    .btn-secondary:active { box-shadow: 0 1px 0 #050810, inset 0 1px 0 rgba(150,200,255,0.06); }
+
+    .btn-icon { font-size: 1.3rem; }
+
+    .hero-note {
+      font-size: 0.85rem;
+      color: var(--ink-faint);
+    }
+
+    /* ── SCROLL SHOWCASE ── */
+    .scroll-showcase {
+      position: relative;
+      z-index: 1;
+      height: 400vh;
+    }
+
+    .scroll-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 2rem;
+    }
+
+    /* ── MOCKUP ── */
+    .mockup-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .mockup-frame {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow:
+        0 0 0 1px var(--line-soft),
+        0 8px 40px rgba(0,0,0,0.6),
+        0 0 60px rgba(63,169,230,0.08);
+      overflow: hidden;
+    }
+
+    .mockup-bar {
+      background: var(--panel-2);
+      border-bottom: 2px solid var(--line);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: var(--red); }
+    .dot-gold { background: var(--gold); }
+    .dot-green { background: var(--green); }
+
+    .mockup-title {
+      margin-left: 10px;
+      font-size: 0.85rem;
+      color: var(--ink-faint);
+    }
+
+    .mockup-body {
+      position: relative;
+      padding: 2rem;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      overflow: hidden;
+    }
+
+    .mockup-stat-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .mockup-stat {
+      background: var(--panel-2);
+      border: 2px solid var(--line);
+      border-radius: 9px;
+      padding: 16px 24px;
+      text-align: center;
+      box-shadow: 0 3px 0 #050810, inset 0 1px 0 rgba(150,200,255,0.08);
+      min-width: 120px;
+    }
+
+    .mockup-stat-val {
+      font-family: 'VT323', monospace;
+      font-size: 2.2rem;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .mockup-stat-val.cyan { color: var(--cyan-bright); }
+    .mockup-stat-val.gold { color: var(--gold); }
+    .mockup-stat-val.green { color: var(--green); }
+    .mockup-stat-val.flame { color: var(--flame); }
+
+    .mockup-stat-label {
+      font-size: 0.8rem;
+      color: var(--ink-dim);
+    }
+
+    /* ── SLIDE SYSTEM ── */
+    .mockup-slide {
+      position: absolute;
+      inset: 0;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    .mockup-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .slide-label {
+      font-size: 0.75rem;
+      color: var(--cyan-bright);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .slide-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+
+    .slide-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--line);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .slide-dot.active {
+      background: var(--cyan-bright);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    .scroll-hint {
+      text-align: center;
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      animation: bounceY 1.8s ease-in-out infinite;
+      transition: opacity 0.4s;
+    }
+
+    .scroll-hint.hidden { opacity: 0; pointer-events: none; }
+
+    @keyframes bounceY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    /* ── SLIDE 2: TROFEI ── */
+    .mockup-trophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .mockup-trophy {
+      background: var(--panel-2);
+      border: 2px solid var(--gold);
+      border-radius: 9px;
+      padding: 10px 6px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(243,194,59,0.18), 0 3px 0 #050810;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .mockup-trophy.locked {
+      border-color: var(--line);
+      box-shadow: 0 3px 0 #050810;
+      opacity: 0.4;
+      filter: grayscale(0.5);
+    }
+
+    .mockup-trophy-icon { font-size: 1.5rem; }
+
+    .mockup-trophy-name {
+      font-size: 0.65rem;
+      color: var(--gold);
+      line-height: 1.2;
+    }
+
+    .mockup-trophy.locked .mockup-trophy-name { color: var(--ink-faint); }
+
+    /* ── SLIDE 3: CLASSIFICA ── */
+    .mockup-leaderboard {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .lb-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--panel-2);
+      border: 2px solid var(--line);
+      border-radius: 9px;
+      padding: 11px 16px;
+      box-shadow: 0 3px 0 #050810;
+    }
+
+    .lb-row.you {
+      border-color: var(--cyan-deep);
+      box-shadow: 0 3px 0 #050810, 0 0 14px rgba(63,169,230,0.2);
+    }
+
+    .lb-rank {
+      font-family: 'VT323', monospace;
+      font-size: 1.4rem;
+      width: 22px;
+      text-align: center;
+      color: var(--ink-dim);
+    }
+
+    .lb-rank.gold { color: var(--gold); text-shadow: 0 0 8px rgba(243,194,59,0.5); }
+    .lb-rank.cyan { color: var(--cyan-bright); }
+
+    .lb-name { flex: 1; font-size: 0.9rem; color: var(--ink); }
+
+    .lb-hours {
+      font-family: 'VT323', monospace;
+      font-size: 1.2rem;
+      color: var(--cyan-bright);
+    }
+
+    /* ── SLIDE 4: ABITUDINI ── */
+    .mockup-habits {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .habit-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--panel-2);
+      border: 2px solid var(--line);
+      border-radius: 9px;
+      padding: 9px 14px;
+      box-shadow: 0 3px 0 #050810;
+    }
+
+    .habit-name {
+      flex: 0 0 130px;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      white-space: nowrap;
+    }
+
+    .habit-days { display: flex; gap: 4px; }
+
+    .habit-day {
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      border: 2px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      color: var(--ink-faint);
+    }
+
+    .habit-day.done {
+      background: var(--green);
+      border-color: var(--green);
+      color: #062010;
+      box-shadow: 0 0 5px rgba(70,201,95,0.35);
+    }
+
+    .habit-day.today { border-color: var(--cyan); color: var(--cyan-bright); }
+
+    /* ── FEATURES ── */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto 150px;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--cyan-bright);
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 12px rgba(121,208,249,0.3);
+    }
+
+    .section-sub {
+      color: var(--ink-dim);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .feature-card {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 9px;
+      padding: 2rem;
+      box-shadow: 0 4px 0 #050810, inset 0 1px 0 rgba(150,200,255,0.08);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--cyan-deep);
+      box-shadow: 0 4px 0 #050810, 0 0 18px rgba(63,169,230,0.15), inset 0 1px 0 rgba(150,200,255,0.1);
+    }
+
+    .feature-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      line-height: 1.5;
+    }
+
+    /* ── GUIDA INSTALLAZIONE ── */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 640px) { .guide-grid { grid-template-columns: 1fr; } }
+
+    .guide-card {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 9px;
+      padding: 2rem;
+      box-shadow: 0 4px 0 #050810, inset 0 1px 0 rgba(150,200,255,0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .guide-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guide-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .guide-steps li {
+      display: flex;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      line-height: 1.5;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      background: var(--cyan-deep);
+      color: var(--ink);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .guide-note {
+      margin-top: auto;
+      padding-top: 1.25rem;
+      padding: 10px 14px;
+      background: rgba(70,201,95,0.08);
+      border: 1px solid rgba(70,201,95,0.3);
+      border-radius: 7px;
+      font-size: 0.85rem;
+      color: var(--green);
+    }
+
+    /* ── SICUREZZA ── */
+    .security-panel {
+      background: var(--panel);
+      border: 2px solid var(--cyan-deep);
+      border-radius: 9px;
+      padding: 2rem;
+      box-shadow: 0 0 24px rgba(63,169,230,0.12), 0 4px 0 #050810, inset 0 1px 0 rgba(150,200,255,0.1);
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .security-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .security-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px var(--green);
+    }
+
+    .security-item-text { font-size: 0.9rem; color: var(--ink-dim); line-height: 1.5; }
+    .security-item-text strong { color: var(--ink); display: block; margin-bottom: 2px; }
+
+    /* ── CONTRIBUISCI ── */
+    .feedback-form {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 9px;
+      padding: 2rem;
+      box-shadow: 0 4px 0 #050810, inset 0 1px 0 rgba(150,200,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .feedback-form-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-row label {
+      font-size: 0.85rem;
+      color: var(--ink-dim);
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      background: var(--panel-2);
+      border: 2px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink);
+      font-family: 'Pixelify Sans', sans-serif;
+      font-size: 0.9rem;
+      padding: 10px 14px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      border-color: var(--cyan-deep);
+    }
+
+    .form-row textarea { resize: vertical; min-height: 100px; }
+
+    .form-row select option { background: var(--panel-2); }
+
+    .form-submit {
+      align-self: center;
+    }
+
+    .star-panel {
+      margin-top: 1.5rem;
+      background: var(--panel);
+      border: 2px solid var(--gold);
+      border-radius: 9px;
+      padding: 1.75rem 2rem;
+      box-shadow: 0 0 20px rgba(243,194,59,0.1), 0 4px 0 #050810, inset 0 1px 0 rgba(255,220,100,0.08);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .star-panel-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .star-panel-desc {
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      max-width: 480px;
+      line-height: 1.5;
+    }
+
+    .btn-star {
+      background: linear-gradient(180deg, #ffe17a 0%, #f3c23b 40%, #d4a020 100%);
+      color: #1a1200;
+      border-color: var(--gold);
+      box-shadow: 0 3px 0 #8a6200, inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .btn-star:active { box-shadow: 0 1px 0 #8a6200, inset 0 1px 0 rgba(255,255,255,0.15); }
+
+    /* ── NAV HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: 2px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink);
+      font-size: 1.1rem;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      line-height: 1;
+    }
+
+    .nav-hamburger:hover { border-color: var(--cyan); color: var(--cyan-bright); }
+
+    /* ── MOBILE TEASER ── */
+    .mobile-teaser-section {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 2rem;
+      margin-bottom: 120px;
+    }
+
+    .mobile-teaser {
+      margin-top: 0;
+      background: var(--panel);
+      border: 2px solid var(--purple);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      box-shadow:
+        0 0 40px rgba(139,92,255,0.15),
+        0 0 80px rgba(139,92,255,0.06),
+        0 4px 0 #050810,
+        inset 0 1px 0 rgba(180,150,255,0.1);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .mobile-badge {
+      display: inline-block;
+      background: rgba(139,92,255,0.18);
+      border: 1px solid var(--purple);
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      color: #c4a8ff;
+      letter-spacing: 0.5px;
+    }
+
+    .mobile-teaser-emoji {
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .mobile-teaser-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .mobile-teaser-title span { color: #c4a8ff; }
+
+    .mobile-teaser-desc {
+      font-size: 0.95rem;
+      color: var(--ink-dim);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .mobile-pills {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .mobile-pill {
+      background: var(--panel-2);
+      border: 2px solid rgba(139,92,255,0.4);
+      border-radius: 7px;
+      padding: 7px 16px;
+      font-size: 0.85rem;
+      color: #c4a8ff;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      /* Nav */
+      nav {
+        padding: 0 1.25rem;
+        position: relative;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 56px;
+      }
+
+      .nav-hamburger { display: flex; align-items: center; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: rgba(8,10,24,0.98);
+        border-top: 2px solid var(--line);
+        border-bottom: 2px solid var(--line);
+        flex-direction: column;
+        gap: 0;
+        z-index: 200;
+        width: 100%;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links li { border-bottom: 1px solid var(--line-soft); }
+      .nav-links a { display: block; padding: 0.85rem 1.5rem; font-size: 1rem; }
+
+      /* Hero */
+      .hero { padding: 48px 1.5rem 60px; }
+      .hero h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .btn { padding: 12px 20px; font-size: 0.9rem; }
+      .download-row { flex-direction: column; align-items: center; }
+
+      /* Scroll showcase */
+      .scroll-showcase { height: 300vh; }
+      .mockup-stat-row { max-width: 300px; }
+      .mockup-stat { min-width: 100px; padding: 12px 16px; }
+      .mockup-stat-val { font-size: 1.7rem; }
+      .mockup-trophy-grid { grid-template-columns: repeat(2, 1fr); max-width: 320px; }
+      .habit-name { flex: 0 0 85px; font-size: 0.72rem; }
+      .habit-day { width: 20px; height: 20px; font-size: 0.52rem; }
+      .mockup-wrap { padding: 0; }
+
+      /* Sezioni */
+      .section { padding: 0 1.25rem; margin-bottom: 90px; }
+      .section-title { font-size: 1.25rem; }
+      .features-grid { grid-template-columns: 1fr; }
+
+      /* Mobile teaser */
+      .mobile-teaser-section { padding: 40px 1.25rem; }
+      .mobile-teaser { padding: 1.75rem 1.5rem; }
+      .mobile-pills { justify-content: flex-start; }
+
+      /* CTA */
+      .cta-section { padding: 80px 1.5rem; }
+      .cta-section .download-row { flex-direction: column; align-items: center; }
+
+      /* FAQ */
+      .faq-question { font-size: 0.88rem; padding: 0.85rem 1.1rem; }
+      .faq-item.open .faq-answer { padding: 0 1.1rem 0.85rem; }
+      .faq-answer { padding: 0 1.1rem; }
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .faq-item {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 9px;
+      box-shadow: 0 4px 0 #050810, inset 0 1px 0 rgba(150,200,255,0.06);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item.open { border-color: var(--cyan-deep); }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      user-select: none;
+      gap: 1rem;
+    }
+
+    .faq-question:hover { color: var(--cyan-bright); }
+
+    .faq-arrow {
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: var(--ink-dim);
+      transition: transform 0.3s;
+    }
+
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 1.5rem;
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      line-height: 1.6;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 0 1.5rem 1rem;
+    }
+
+    /* ── INVITE BANNER ── */
+    #invite-banner {
+      display: none;
+      position: sticky;
+      top: 56px;
+      z-index: 90;
+      background: linear-gradient(90deg, rgba(6,182,212,0.12), rgba(139,92,255,0.1));
+      border-bottom: 2px solid rgba(6,182,212,0.35);
+      backdrop-filter: blur(8px);
+      padding: 12px 2rem;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .invite-banner-label {
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+    }
+
+    .invite-banner-code {
+      display: inline-block;
+      background: rgba(6,182,212,0.15);
+      border: 2px solid var(--cyan-deep);
+      border-radius: 7px;
+      padding: 4px 14px;
+      font-family: 'VT323', monospace;
+      font-size: 1.5rem;
+      color: var(--cyan-bright);
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px rgba(121,208,249,0.4);
+    }
+
+    .invite-banner-btn {
+      background: linear-gradient(180deg, #8fdcfb 0%, #46b6ec 40%, #2f97d4 100%);
+      color: #040d1a;
+      border: 2px solid var(--cyan-bright);
+      border-radius: 7px;
+      padding: 6px 16px;
+      font-family: 'Pixelify Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 0 var(--cyan-deep);
+      transition: transform 0.1s;
+    }
+
+    .invite-banner-btn:active { transform: translateY(1px); }
+
+    .invite-banner-note {
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+    }
+
+    /* ── CTA FINALE ── */
+    .cta-section {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 120px 2rem;
+      border-top: 2px solid var(--line-soft);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-section p {
+      color: var(--ink-dim);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 2px solid var(--line-soft);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--ink-faint);
+    }
+
+    footer a { color: var(--ink-dim); text-decoration: none; }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+
+  <!-- INVITE BANNER (mostrato solo se ?ref=CODE è presente nell'URL) -->
+  <div id="invite-banner">
+    <span class="invite-banner-label">🎁 Sei stato invitato! Il tuo codice di invito è:</span>
+    <span class="invite-banner-code" id="invite-code">—</span>
+    <button class="invite-banner-btn" id="copy-code-btn" onclick="copyInviteCode()">Copia codice</button>
+    <span class="invite-banner-note">Inseriscilo nell'app quando fai il primo accesso</span>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">StudyLoop</div>
+    <button class="nav-hamburger" id="nav-toggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#scarica">Scarica</a></li>
+      <li><a href="#funzionalita">Funzionalità</a></li>
+      <li><a href="#sociale">Sociale</a></li>
+      <li><a href="#installa">Installazione</a></li>
+      <li><a href="#contribuisci">Contribuisci</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">🎮 Versione 0.1.5 disponibile</div>
+    <h1>Studia meglio,<br><span>ogni giorno</span></h1>
+    <p class="hero-sub">
+      StudyLoop è l'app desktop per tenere traccia delle sessioni di studio,
+      costruire abitudini solide e restare motivato con i tuoi amici.
+    </p>
+    <div class="download-row" id="scarica">
+      <a class="btn btn-primary" href="StudyLoop_0.1.6_universal.dmg" download="StudyLoop_0.1.6_universal.dmg">
+        <span class="btn-icon">🍎</span> Scarica per Mac
+      </a>
+      <a class="btn btn-secondary" href="StudyLoop_0.1.5_x64-setup.exe" download="StudyLoop_0.1.5_x64-setup.exe">
+        <span class="btn-icon">🪟</span> Scarica per Windows
+      </a>
+    </div>
+    <p class="hero-note">macOS 11+ · Windows 10/11 · Gratuito</p>
+  </section>
+
+  <!-- SCROLL SHOWCASE -->
+  <section class="scroll-showcase">
+    <div class="scroll-sticky">
+      <div class="mockup-wrap">
+        <div class="mockup-frame">
+          <div class="mockup-bar">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-gold"></div>
+            <div class="dot dot-green"></div>
+            <span class="mockup-title">StudyLoop</span>
+          </div>
+          <div class="mockup-body">
+
+            <!-- SLIDE 1: STATS -->
+            <div class="mockup-slide active">
+              <div class="slide-label">⏱️ Focus &amp; Statistiche</div>
+              <div class="mockup-stat-row">
+                <div class="mockup-stat">
+                  <div class="mockup-stat-val cyan">02:34</div>
+                  <div class="mockup-stat-label">sessione attiva</div>
+                </div>
+                <div class="mockup-stat">
+                  <div class="mockup-stat-val gold">12h 40m</div>
+                  <div class="mockup-stat-label">questa settimana</div>
+                </div>
+                <div class="mockup-stat">
+                  <div class="mockup-stat-val flame">🔥 7</div>
+                  <div class="mockup-stat-label">giorni di streak</div>
+                </div>
+                <div class="mockup-stat">
+                  <div class="mockup-stat-val green">3</div>
+                  <div class="mockup-stat-label">amici online</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SLIDE 2: TROFEI -->
+            <div class="mockup-slide">
+              <div class="slide-label">🏆 Trofei &amp; Badge</div>
+              <div class="mockup-trophy-grid">
+                <div class="mockup-trophy">
+                  <div class="mockup-trophy-icon">⏱️</div>
+                  <div class="mockup-trophy-name">Prima ora</div>
+                </div>
+                <div class="mockup-trophy">
+                  <div class="mockup-trophy-icon">🔥</div>
+                  <div class="mockup-trophy-name">7 giorni</div>
+                </div>
+                <div class="mockup-trophy">
+                  <div class="mockup-trophy-icon">📚</div>
+                  <div class="mockup-trophy-name">Maratoneta</div>
+                </div>
+                <div class="mockup-trophy">
+                  <div class="mockup-trophy-icon">⭐</div>
+                  <div class="mockup-trophy-name">100h totali</div>
+                </div>
+                <div class="mockup-trophy">
+                  <div class="mockup-trophy-icon">🌙</div>
+                  <div class="mockup-trophy-name">Noctua</div>
+                </div>
+                <div class="mockup-trophy">
+                  <div class="mockup-trophy-icon">💎</div>
+                  <div class="mockup-trophy-name">Leggenda</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SLIDE 3: CLASSIFICA -->
+            <div class="mockup-slide">
+              <div class="slide-label">👥 Classifica amici</div>
+              <div class="mockup-leaderboard">
+                <div class="lb-row">
+                  <span class="lb-rank gold">1</span>
+                  <span class="lb-name">Marco</span>
+                  <span class="lb-hours">18h 20m</span>
+                </div>
+                <div class="lb-row you">
+                  <span class="lb-rank cyan">2</span>
+                  <span class="lb-name">Tu ✦</span>
+                  <span class="lb-hours">12h 40m</span>
+                </div>
+                <div class="lb-row">
+                  <span class="lb-rank">3</span>
+                  <span class="lb-name">Sofia</span>
+                  <span class="lb-hours">9h 15m</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SLIDE 4: ABITUDINI -->
+            <div class="mockup-slide">
+              <div class="slide-label">✅ Tracker Abitudini</div>
+              <div class="mockup-habits">
+                <div class="habit-row">
+                  <span class="habit-name">📖 Studia 2h</span>
+                  <div class="habit-days">
+                    <div class="habit-day done">L</div>
+                    <div class="habit-day done">M</div>
+                    <div class="habit-day done">M</div>
+                    <div class="habit-day done">G</div>
+                    <div class="habit-day today">V</div>
+                    <div class="habit-day">S</div>
+                    <div class="habit-day">D</div>
+                  </div>
+                </div>
+                <div class="habit-row">
+                  <span class="habit-name">🧘 Pausa attiva</span>
+                  <div class="habit-days">
+                    <div class="habit-day done">L</div>
+                    <div class="habit-day done">M</div>
+                    <div class="habit-day">M</div>
+                    <div class="habit-day done">G</div>
+                    <div class="habit-day today">V</div>
+                    <div class="habit-day">S</div>
+                    <div class="habit-day">D</div>
+                  </div>
+                </div>
+                <div class="habit-row">
+                  <span class="habit-name">🌙 No schermi -1h</span>
+                  <div class="habit-days">
+                    <div class="habit-day done">L</div>
+                    <div class="habit-day">M</div>
+                    <div class="habit-day done">M</div>
+                    <div class="habit-day">G</div>
+                    <div class="habit-day today">V</div>
+                    <div class="habit-day">S</div>
+                    <div class="habit-day">D</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="slide-dots">
+          <div class="slide-dot active"></div>
+          <div class="slide-dot"></div>
+          <div class="slide-dot"></div>
+          <div class="slide-dot"></div>
+        </div>
+        <p class="scroll-hint">↓ scorri per scoprire</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNZIONALITÀ -->
+  <section class="section" id="funzionalita">
+    <div class="section-title" style="text-align:center">Tutto quello che ti serve per studiare</div>
+    <div class="section-sub">Semplice, potente, con un tocco retro.</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <div class="feature-title">Timer di focus</div>
+        <div class="feature-desc">Sessioni Pomodoro o timer libero. Traccia ogni minuto di studio con precisione.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Statistiche dettagliate</div>
+        <div class="feature-desc">Visualizza le ore studiate per giorno, settimana e materia. Vedi i tuoi progressi nel tempo.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <div class="feature-title">Badge e trofei</div>
+        <div class="feature-desc">Sblocca ricompense raggiungendo obiettivi. Lo studio diventa un gioco.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <div class="feature-title">Studi con gli amici</div>
+        <div class="feature-desc">Vedi chi è online, confronta le ore e sfidati nella classifica settimanale.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <div class="feature-title">Abitudini e todo</div>
+        <div class="feature-desc">Costruisci routine solide con il tracker delle abitudini e la lista todo giornaliera.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎵</div>
+        <div class="feature-title">Musica integrata</div>
+        <div class="feature-desc">Playlist lofi e musica ambientale per restare concentrato senza distrazioni.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOBILE TEASER -->
+  <section class="mobile-teaser-section">
+    <div class="mobile-teaser">
+      <div class="mobile-badge">🔜 In arrivo</div>
+      <div class="mobile-teaser-emoji">📱</div>
+      <div class="mobile-teaser-title">StudyLoop sta arrivando su <span>iPhone, iPad e Android</span></div>
+      <div class="mobile-teaser-desc">Stessa esperienza, stesso account, sempre sincronizzato. Porta il tuo studio ovunque — su telefono e tablet, dove preferisci.</div>
+      <div class="mobile-pills">
+        <div class="mobile-pill">🍎 iPhone</div>
+        <div class="mobile-pill">🍎 iPad</div>
+        <div class="mobile-pill">🤖 Android telefono</div>
+        <div class="mobile-pill">🤖 Android tablet</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIA INSIEME -->
+  <section class="section" id="sociale">
+    <div class="section-title" style="text-align:center">Studia meglio, insieme</div>
+    <div class="section-sub">StudyLoop non è un'app solitaria — sfida i tuoi amici e vinci trofei insieme.</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <div class="feature-title">Sfide settimanali</div>
+        <div class="feature-desc">Ogni settimana una nuova sfida: chi studia di più, chi mantiene lo streak più lungo. Scala la classifica con i tuoi amici.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎖️</div>
+        <div class="feature-title">Trofei di gruppo</div>
+        <div class="feature-desc">Alcuni trofei si sbloccano solo studiando insieme. Completa sfide collettive e guadagna badge esclusivi col tuo gruppo.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚪</div>
+        <div class="feature-title">Study Rooms</div>
+        <div class="feature-desc">Entra in una stanza virtuale con i tuoi amici: vedi chi è online, quante ore studiate insieme e restate motivati a vicenda.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDA INSTALLAZIONE -->
+  <section class="section" id="installa">
+    <div class="section-title" style="text-align:center">Come installare</div>
+    <div class="section-sub">L'app non è ancora firmata digitalmente. Segui questi passi per aprirla senza problemi.</div>
+    <div class="guide-grid">
+
+      <!-- MAC -->
+      <div class="guide-card">
+        <div class="guide-card-title">🍎 macOS</div>
+        <ol class="guide-steps">
+          <li>
+            <span class="step-num">1</span>
+            <span>Scarica il file <strong>.dmg</strong> e aprilo.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span>Trascina <strong>StudyLoop</strong> nella cartella <strong>Applicazioni</strong>.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span>Se compare un avviso di sicurezza, clicca <strong>Fine</strong> (non "Cestino").</span>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <span>Vai in <strong>Impostazioni di Sistema → Privacy e Sicurezza</strong>.</span>
+          </li>
+          <li>
+            <span class="step-num">5</span>
+            <span>Clicca <strong>"Apri comunque"</strong> accanto a StudyLoop. Fatto!</span>
+          </li>
+        </ol>
+        <div class="guide-note">✓ Questa procedura va fatta solo la prima volta.</div>
+      </div>
+
+      <!-- WINDOWS -->
+      <div class="guide-card">
+        <div class="guide-card-title">🪟 Windows</div>
+        <ol class="guide-steps">
+          <li>
+            <span class="step-num">1</span>
+            <span>Scarica il file <strong>.msi</strong> o <strong>.exe</strong> e avvialo.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span>Se compare <strong>Windows SmartScreen</strong>, clicca su <strong>"Ulteriori informazioni"</strong>.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span>Clicca <strong>"Esegui comunque"</strong> per procedere con l'installazione.</span>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <span>Segui il wizard di installazione e avvia <strong>StudyLoop</strong>.</span>
+          </li>
+        </ol>
+        <div class="guide-note">✓ Questa procedura va fatta solo la prima volta.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTRIBUISCI -->
+  <section class="section" id="contribuisci">
+    <div class="section-title" style="text-align:center">Contribuisci</div>
+    <div class="section-sub">Hai trovato un bug o vuoi suggerire qualcosa? Scrivici — ogni feedback aiuta a migliorare StudyLoop.</div>
+
+    <div class="feedback-form">
+      <div class="feedback-form-title">✉️ Scrivici direttamente</div>
+      <div class="form-row">
+        <label for="fb-name">Nome (opzionale)</label>
+        <input type="text" id="fb-name" placeholder="Il tuo nome">
+      </div>
+      <div class="form-row">
+        <label for="fb-type">Tipo di segnalazione</label>
+        <select id="fb-type">
+          <option value="bug">🐛 Bug</option>
+          <option value="feature">💡 Suggerimento / Feature</option>
+          <option value="altro">💬 Altro</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="fb-msg">Messaggio</label>
+        <textarea id="fb-msg" placeholder="Descrivi il problema o la tua idea..."></textarea>
+      </div>
+      <button class="btn btn-primary form-submit" onclick="inviaFeedback()">Invia feedback</button>
+    </div>
+
+    <div class="star-panel">
+      <div class="star-panel-title">⭐ Ti piace StudyLoop?</div>
+      <div class="star-panel-desc">Se l'app ti è utile, lascia una stella su GitHub — ci aiuta a farla crescere e a far sapere ad altri studenti che esiste.</div>
+      <a class="btn btn-star" href="https://github.com/studyloopplatform-creator/studyloop-desktop" target="_blank">
+        ⭐ Stella su GitHub
+      </a>
+    </div>
+  </section>
+
+  <script>
+    // ── Gestione codice referral da URL (?ref=CODE) ─────────────────────────────
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var ref = params.get('ref');
+      if (!ref) return;
+      ref = ref.toUpperCase().slice(0, 12);
+      var banner = document.getElementById('invite-banner');
+      var codeEl = document.getElementById('invite-code');
+      if (banner && codeEl) {
+        codeEl.textContent = ref;
+        banner.style.display = 'flex';
+      }
+    })();
+
+    function copyInviteCode() {
+      var code = document.getElementById('invite-code').textContent;
+      var btn = document.getElementById('copy-code-btn');
+      if (!code || code === '—') return;
+      navigator.clipboard.writeText(code).then(function () {
+        btn.textContent = 'Copiato ✓';
+        setTimeout(function () { btn.textContent = 'Copia codice'; }, 2500);
+      }).catch(function () {
+        btn.textContent = code;
+      });
+    }
+
+    (function () {
+      var toggle = document.getElementById('nav-toggle');
+      var links = document.getElementById('nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        links.classList.toggle('open');
+        toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
+      });
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          toggle.textContent = '☰';
+        });
+      });
+    })();
+
+    document.querySelectorAll('.faq-question').forEach(function (q) {
+      q.addEventListener('click', function () {
+        var item = q.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function (el) { el.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    (function () {
+      var showcase = document.querySelector('.scroll-showcase');
+      var slides = document.querySelectorAll('.mockup-slide');
+      var dots = document.querySelectorAll('.slide-dot');
+      var hint = document.querySelector('.scroll-hint');
+      var current = 0;
+      var n = slides.length;
+
+      function goTo(i) {
+        if (i === current) return;
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = i;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        if (hint) hint.classList.toggle('hidden', current > 0);
+      }
+
+      window.addEventListener('scroll', function () {
+        var rect = showcase.getBoundingClientRect();
+        var max = showcase.offsetHeight - window.innerHeight;
+        var progress = Math.max(0, Math.min(1, -rect.top / max));
+        var idx = Math.min(Math.floor(progress * n), n - 1);
+        goTo(idx);
+      }, { passive: true });
+    })();
+
+    function inviaFeedback() {
+      var name = document.getElementById('fb-name').value.trim();
+      var type = document.getElementById('fb-type');
+      var typeLabel = type.options[type.selectedIndex].text;
+      var msg = document.getElementById('fb-msg').value.trim();
+      if (!msg) { alert('Scrivi un messaggio prima di inviare.'); return; }
+      var subject = encodeURIComponent('[StudyLoop] ' + typeLabel + (name ? ' da ' + name : ''));
+      var body = encodeURIComponent((name ? 'Da: ' + name + '\n\n' : '') + 'Tipo: ' + typeLabel + '\n\n' + msg);
+      window.location.href = 'mailto:studyloopplatform@gmail.com?subject=' + subject + '&body=' + body;
+    }
+  </script>
+
+  <!-- CTA FINALE -->
+  <section class="cta-section">
+    <h2>Pronto a studiare meglio?</h2>
+    <p>Scarica gratis per iniziare.</p>
+    <div class="download-row">
+      <a class="btn btn-primary" href="StudyLoop_0.1.6_universal.dmg" download="StudyLoop_0.1.6_universal.dmg">
+        <span class="btn-icon">🍎</span> Scarica per Mac
+      </a>
+      <a class="btn btn-secondary" href="StudyLoop_0.1.5_x64-setup.exe" download="StudyLoop_0.1.5_x64-setup.exe">
+        <span class="btn-icon">🪟</span> Scarica per Windows
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 StudyLoop · Fatto con ❤️ ·
+      <a href="https://github.com/studyloopplatform-creator/studyloop-desktop" target="_blank">GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>

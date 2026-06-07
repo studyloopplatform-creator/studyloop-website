@@ -1,0 +1,11 @@
+{
+  "version": "0.1.6",
+  "notes": "Aggiornamento automatico integrato. Miglioramenti di stabilità.",
+  "pub_date": "2026-06-07T00:00:00Z",
+  "platforms": {
+    "darwin-universal": {
+      "url": "https://studyloopplatform-creator.github.io/studyloop-website/StudyLoop_0.1.6_universal.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTMnFBREJQWDlzdmFFZDZRcEI1NW1SaWhaK3VvVXpNbmJtaFhIaXJOMk9XU2lvcHE2RHdYSHE0ejdtQ1R5N2lWMVlnU3JtbksvY25YaWxDQTNRZERtMkF4d0t2MTdqTXdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgwODY1NTc5CWZpbGU6U3R1ZHlMb29wXzAuMS42X3VuaXZlcnNhbC5hcHAudGFyLmd6Cnc5OFpWWTVMcDh0SmpqcXVlSDlpM1ZtQnJ6cjJPQWxxYTA4UmUvSytMVDFuWjU1N1lKbjJ1TWt3WEZBZXlkZi93T1prZm9aR2NMUVc5ZVdvMEhjR0J3PT0K"
+    }
+  }
+}
