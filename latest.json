@@ -1,11 +1,11 @@
 {
-  "version": "0.1.6",
-  "notes": "Aggiornamento automatico integrato. Miglioramenti di stabilità.",
-  "pub_date": "2026-06-07T00:00:00Z",
+  "version": "0.1.7",
+  "notes": "Fix salvataggio avatar. Aggiornamento automatico in-app.",
+  "pub_date": "2026-06-08T00:00:00Z",
   "platforms": {
     "darwin-universal": {
-      "url": "https://focusloop.one/StudyLoop_0.1.6_universal.app.tar.gz",
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTMnFBREJQWDlzdmFFZDZRcEI1NW1SaWhaK3VvVXpNbmJtaFhIaXJOMk9XU2lvcHE2RHdYSHE0ejdtQ1R5N2lWMVlnU3JtbksvY25YaWxDQTNRZERtMkF4d0t2MTdqTXdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgwODY1NTc5CWZpbGU6U3R1ZHlMb29wXzAuMS42X3VuaXZlcnNhbC5hcHAudGFyLmd6Cnc5OFpWWTVMcDh0SmpqcXVlSDlpM1ZtQnJ6cjJPQWxxYTA4UmUvSytMVDFuWjU1N1lKbjJ1TWt3WEZBZXlkZi93T1prZm9aR2NMUVc5ZVdvMEhjR0J3PT0K"
+      "url": "https://focusloop.one/StudyLoop_0.1.7_universal.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTMnFBREJQWDlzdlFTTjdjQTE5STFHYlFpOUNPY1E1cmJzMmllQ2Q0WHNEUGpmMU1IdmtsdG9lUXdRNEc0QmtUUmlzQWxCUFpBZG5YWjdYc3FzQ2RXSy9JNlR3S0ZEN0E0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgwOTA4MDEyCWZpbGU6U3R1ZHlMb29wXzAuMS43X3VuaXZlcnNhbC5hcHAudGFyLmd6CkZWVWpDSnh2cWtiZUhBWkQ1M0lac085U0Z5U0NJdFhXKzd6WTV5VE1zS010bGl0Y05zY1lRMXpYN2hKVEtmcXQyZG9xWWpMMDhiczRwUG5SWURGbUJnPT0K"
     }
   }
 }
