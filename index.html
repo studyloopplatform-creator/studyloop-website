@@ -1088,10 +1088,12 @@
       costruire abitudini solide e restare motivato con i tuoi amici.
     </p>
     <div class="download-row" id="scarica">
-      <a class="btn btn-primary" href="StudyLoop_0.1.8_universal.dmg" download="StudyLoop_0.1.8_universal.dmg">
+      <a class="btn btn-primary" href="StudyLoop_0.1.8_universal.dmg"
+         onclick="event.preventDefault(); dlFiles(['StudyLoop_0.1.8_universal.dmg','README_Mac.html'],'mac')">
         <span class="btn-icon">🍎</span> Scarica per Mac
       </a>
-      <a class="btn btn-secondary" href="StudyLoop_0.1.8_x64-setup.exe" download="StudyLoop_0.1.8_x64-setup.exe">
+      <a class="btn btn-secondary" href="StudyLoop_0.1.8_x64-setup.exe"
+         onclick="event.preventDefault(); dlFiles(['StudyLoop_0.1.8_x64-setup.exe','README_Windows.html'],'win')">
         <span class="btn-icon">🪟</span> Scarica per Windows
       </a>
     </div>
@@ -1506,16 +1508,20 @@
       window.location.href = 'mailto:studyloopplatform@gmail.com?subject=' + subject + '&body=' + body;
     }
 
-    (function () {
-      var busy = false;
-      document.querySelectorAll('a[download]').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          if (busy) { e.preventDefault(); return; }
-          busy = true;
-          setTimeout(function () { busy = false; }, 4000);
-        });
+    var _dlBusy = {};
+    function dlFiles(files, id) {
+      if (_dlBusy[id]) return;
+      _dlBusy[id] = true;
+      setTimeout(function () { delete _dlBusy[id]; }, 5000);
+      files.forEach(function (f) {
+        var a = document.createElement('a');
+        a.href = f;
+        a.download = f.split('/').pop();
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       });
-    })();
+    }
   </script>
 
   <!-- CTA FINALE -->
@@ -1523,10 +1529,12 @@
     <h2>Pronto a studiare meglio?</h2>
     <p>Scarica gratis per iniziare.</p>
     <div class="download-row">
-      <a class="btn btn-primary" href="StudyLoop_0.1.8_universal.dmg" download="StudyLoop_0.1.8_universal.dmg">
+      <a class="btn btn-primary" href="StudyLoop_0.1.8_universal.dmg"
+         onclick="event.preventDefault(); dlFiles(['StudyLoop_0.1.8_universal.dmg','README_Mac.html'],'mac')">
         <span class="btn-icon">🍎</span> Scarica per Mac
       </a>
-      <a class="btn btn-secondary" href="StudyLoop_0.1.8_x64-setup.exe" download="StudyLoop_0.1.8_x64-setup.exe">
+      <a class="btn btn-secondary" href="StudyLoop_0.1.8_x64-setup.exe"
+         onclick="event.preventDefault(); dlFiles(['StudyLoop_0.1.8_x64-setup.exe','README_Windows.html'],'win')">
         <span class="btn-icon">🪟</span> Scarica per Windows
       </a>
     </div>

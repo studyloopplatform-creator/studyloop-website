@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyLoop — Guida installazione macOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1022;
+      --bg-deep: #080a18;
+      --panel: #161d35;
+      --panel-2: #10162a;
+      --line: #2c3c61;
+      --ink: #eef3ff;
+      --ink-dim: #8a96b4;
+      --cyan: #3fa9e6;
+      --cyan-bright: #79d0f9;
+      --cyan-deep: #1d6fae;
+      --green: #46c95f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--ink);
+      font-family: 'Pixelify Sans', monospace, sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px 60px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(63,169,230,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(63,169,230,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      padding: 40px 0 48px;
+    }
+
+    .logo {
+      display: inline-block;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--cyan-bright);
+      letter-spacing: 2px;
+      text-shadow: 0 0 24px rgba(121,208,249,0.5);
+      margin-bottom: 8px;
+    }
+
+    .logo span {
+      color: var(--ink);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--ink-dim);
+      letter-spacing: 1px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--panel);
+      border: 2px solid var(--cyan-deep);
+      border-radius: 8px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      color: var(--cyan-bright);
+      margin-top: 16px;
+    }
+
+    /* ── SEZIONI ── */
+    .section {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--cyan-bright);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* ── PASSI ── */
+    .step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+
+    .step:last-child { margin-bottom: 0; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: var(--panel-2);
+      border: 2px solid var(--cyan-deep);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--cyan-bright);
+    }
+
+    .step-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .step-body p {
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      line-height: 1.6;
+    }
+
+    .filename {
+      display: inline-block;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2px 8px;
+      color: var(--cyan-bright);
+      font-size: 0.85rem;
+    }
+
+    .arrow-list {
+      margin-top: 8px;
+      list-style: none;
+    }
+
+    .arrow-list li {
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      padding: 3px 0;
+    }
+
+    .arrow-list li::before {
+      content: '► ';
+      color: var(--cyan);
+    }
+
+    /* ── SICUREZZA ── */
+    .security {
+      background: var(--panel-2);
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+
+    .security .section-title {
+      color: var(--cyan-bright);
+    }
+
+    .security p {
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .checklist li {
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .check-icon {
+      color: var(--green);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding-top: 12px;
+    }
+
+    .footer p {
+      font-size: 0.8rem;
+      color: var(--ink-dim);
+      margin-bottom: 6px;
+    }
+
+    .footer a {
+      color: var(--cyan-bright);
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    .footer-brand {
+      font-size: 0.85rem;
+      color: var(--ink-dim);
+      margin-top: 16px;
+    }
+
+    .footer-brand span {
+      color: var(--cyan-bright);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="header">
+      <div class="logo">Study<span>Loop</span></div>
+      <div class="subtitle">Guida all'installazione</div>
+      <div class="badge">macOS · v0.1.8</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Come installare</div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Apri il file scaricato</h3>
+          <p>Fai doppio clic su <span class="filename">StudyLoop_0.1.8_universal.dmg</span><br>
+          Si aprirà una finestra con l'icona dell'applicazione.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Trascina in Applicazioni</h3>
+          <p>Trascina l'icona di StudyLoop nella cartella <strong>Applicazioni</strong> mostrata nella stessa finestra.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Primo avvio</h3>
+          <p>macOS mostra un avviso di sicurezza la prima volta. Per procedere:</p>
+          <ul class="arrow-list">
+            <li>Clic destro sull'icona di StudyLoop in Applicazioni</li>
+            <li>Seleziona <strong>"Apri"</strong> dal menu</li>
+            <li>Nella finestra che appare, clicca <strong>"Apri"</strong></li>
+          </ul>
+          <p style="margin-top:8px;">Dalla volta successiva basta doppio clic normale.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="security">
+      <div class="section-title">Perché macOS mostra un avviso?</div>
+      <p>macOS visualizza questo messaggio per tutte le applicazioni non distribuite tramite l'App Store ufficiale. Non è un segnale di pericolo — è una misura di protezione standard del sistema operativo.</p>
+      <p>StudyLoop è un progetto serio e indipendente:</p>
+      <ul class="checklist">
+        <li><span class="check-icon">✓</span> Nessun dato raccolto senza il tuo consenso esplicito</li>
+        <li><span class="check-icon">✓</span> Completamente gratuita, nessun costo nascosto</li>
+        <li><span class="check-icon">✓</span> Team attivo con aggiornamenti regolari</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>
+        <a href="https://focusloop.one">focusloop.one</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:studyloopplatform@gmail.com">studyloopplatform@gmail.com</a>
+      </p>
+      <p class="footer-brand">© 2026 <span>StudyLoop</span> — Fatto con ❤️</p>
+    </div>
+
+  </div>
+</body>
+</html>
