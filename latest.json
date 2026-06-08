@@ -1,6 +1,6 @@
 {
-  "version": "0.1.7",
-  "notes": "Fix salvataggio avatar. Aggiornamento automatico in-app.",
+  "version": "0.1.8",
+  "notes": "Sistema leghe, user discovery, livelli e temi. Aggiornamento automatico in-app.",
   "pub_date": "2026-06-08T00:00:00Z",
   "platforms": {
     "darwin-universal": {

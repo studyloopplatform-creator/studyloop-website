@@ -1081,17 +1081,17 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">🎮 Versione 0.1.7 disponibile</div>
+    <div class="hero-badge">🎮 Versione 0.1.8 disponibile</div>
     <h1>Studia meglio,<br><span>ogni giorno</span></h1>
     <p class="hero-sub">
       StudyLoop è l'app desktop per tenere traccia delle sessioni di studio,
       costruire abitudini solide e restare motivato con i tuoi amici.
     </p>
     <div class="download-row" id="scarica">
-      <a class="btn btn-primary" href="StudyLoop_0.1.7_universal.dmg" download="StudyLoop_0.1.7_universal.dmg">
+      <a class="btn btn-primary" href="StudyLoop_0.1.8_universal.dmg" download="StudyLoop_0.1.8_universal.dmg">
         <span class="btn-icon">🍎</span> Scarica per Mac
       </a>
-      <a class="btn btn-secondary" href="StudyLoop_0.1.7_x64-setup.exe" download="StudyLoop_0.1.7_x64-setup.exe">
+      <a class="btn btn-secondary" href="StudyLoop_0.1.8_x64-setup.exe" download="StudyLoop_0.1.8_x64-setup.exe">
         <span class="btn-icon">🪟</span> Scarica per Windows
       </a>
     </div>
@@ -1505,6 +1505,17 @@
       var body = encodeURIComponent((name ? 'Da: ' + name + '\n\n' : '') + 'Tipo: ' + typeLabel + '\n\n' + msg);
       window.location.href = 'mailto:studyloopplatform@gmail.com?subject=' + subject + '&body=' + body;
     }
+
+    (function () {
+      var busy = false;
+      document.querySelectorAll('a[download]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          if (busy) { e.preventDefault(); return; }
+          busy = true;
+          setTimeout(function () { busy = false; }, 4000);
+        });
+      });
+    })();
   </script>
 
   <!-- CTA FINALE -->
@@ -1512,10 +1523,10 @@
     <h2>Pronto a studiare meglio?</h2>
     <p>Scarica gratis per iniziare.</p>
     <div class="download-row">
-      <a class="btn btn-primary" href="StudyLoop_0.1.7_universal.dmg" download="StudyLoop_0.1.7_universal.dmg">
+      <a class="btn btn-primary" href="StudyLoop_0.1.8_universal.dmg" download="StudyLoop_0.1.8_universal.dmg">
         <span class="btn-icon">🍎</span> Scarica per Mac
       </a>
-      <a class="btn btn-secondary" href="StudyLoop_0.1.7_x64-setup.exe" download="StudyLoop_0.1.7_x64-setup.exe">
+      <a class="btn btn-secondary" href="StudyLoop_0.1.8_x64-setup.exe" download="StudyLoop_0.1.8_x64-setup.exe">
         <span class="btn-icon">🪟</span> Scarica per Windows
       </a>
     </div>
