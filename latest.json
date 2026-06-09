@@ -1,11 +1,11 @@
 {
-  "version": "0.1.8",
-  "notes": "Sistema leghe, user discovery, livelli e temi. Aggiornamento automatico in-app.",
-  "pub_date": "2026-06-08T00:00:00Z",
+  "version": "0.1.9",
+  "notes": "Notifiche, UI minimale, avatar e miglioramenti ai goal globali.",
+  "pub_date": "2026-06-09T00:00:00Z",
   "platforms": {
     "darwin-universal": {
-      "url": "https://focusloop.one/StudyLoop_0.1.7_universal.app.tar.gz",
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTMnFBREJQWDlzdlFTTjdjQTE5STFHYlFpOUNPY1E1cmJzMmllQ2Q0WHNEUGpmMU1IdmtsdG9lUXdRNEc0QmtUUmlzQWxCUFpBZG5YWjdYc3FzQ2RXSy9JNlR3S0ZEN0E0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgwOTA4MDEyCWZpbGU6U3R1ZHlMb29wXzAuMS43X3VuaXZlcnNhbC5hcHAudGFyLmd6CkZWVWpDSnh2cWtiZUhBWkQ1M0lac085U0Z5U0NJdFhXKzd6WTV5VE1zS010bGl0Y05zY1lRMXpYN2hKVEtmcXQyZG9xWWpMMDhiczRwUG5SWURGbUJnPT0K"
+      "url": "https://github.com/studyloopplatform-creator/studyloop-website/releases/download/v0.1.9/StudyLoop_0.1.9_universal.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTMnFBREJQWDlzdllWNkhPWFpMaWthUWl5VHJwWEZqYVJQN3QwcmFWVGxjYXFFaGtESEM0YVVIeHFLcDQyNnppWm9XYWptWkNQbVB3NEo3NFVISHlsbXdNWTkwbkRsU1FVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgwOTU2ODcyCWZpbGU6U3R1ZHlMb29wXzAuMS45X3VuaXZlcnNhbC5hcHAudGFyLmd6CllYWFp0S2xidk9qNVM1QXJJd2RycDBINkcvcTdjT2xNRkNXcVV3bUVyekdURVNZQ3FVcmovR1FzVStNV3FZc2JucjVLbjZwdmNpNGo1RWFUTTBhcEN3PT0K"
     }
   }
 }
